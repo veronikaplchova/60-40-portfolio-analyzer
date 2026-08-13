@@ -208,6 +208,69 @@ def plot_regime_comparison(regime_analysis: pd.DataFrame) -> None:
     )
     plt.show()
 
+def construct_allocation_portfolios(
+    returns: pd.DataFrame,
+) -> pd.DataFrame:
+    """Construct portfolio returns for several stock-bond allocations."""
+
+    allocations = {
+        "100/0": (1.00, 0.00),
+        "80/20": (0.80, 0.20),
+        "60/40": (0.60, 0.40),
+        "50/50": (0.50, 0.50),
+        "40/60": (0.40, 0.60),
+    }
+
+    portfolio_returns = pd.DataFrame(index=returns.index)
+
+    for portfolio_name, (stock_weight, bond_weight) in allocations.items():
+        portfolio_returns[portfolio_name] = (
+            stock_weight * returns[STOCK_TICKER]
+            + bond_weight * returns[BOND_TICKER]
+        )
+
+    return portfolio_returns
+
+def plot_risk_return(
+    allocation_performance: pd.DataFrame,
+) -> None:
+    """Plot annualized return against volatility for each allocation."""
+
+    volatility = allocation_performance["Annualized Volatility"] * 100
+    annualized_return = allocation_performance["Annualized Return"] * 100
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(
+        volatility,
+        annualized_return,
+        s=120,
+        color="teal",
+    )
+
+    for allocation in allocation_performance.index:
+        plt.annotate(
+            allocation,
+            (
+                volatility.loc[allocation],
+                annualized_return.loc[allocation],
+            ),
+            xytext=(7, 7),
+            textcoords="offset points",
+        )
+
+    plt.title("Risk–Return Comparison of Stock–Bond Allocations")
+    plt.xlabel("Annualized volatility (%)")
+    plt.ylabel("Annualized return (%)")
+    plt.grid(alpha=0.3)
+    plt.tight_layout()
+
+    plt.savefig(
+        "results/figures/risk_return_allocations.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.show()
+
 
 def main():
     """Run the portfolio analysis."""
@@ -221,6 +284,15 @@ def main():
     )
 
     results = construct_portfolio(monthly_returns)
+    allocation_returns = construct_allocation_portfolios(monthly_returns)
+    allocation_performance = calculate_performance_metrics(allocation_returns)
+    allocation_performance["Maximum Drawdown"] = (
+        calculate_maximum_drawdown(allocation_returns)
+    )
+
+    allocation_performance.to_csv(
+        "results/allocation_comparison.csv"
+    )
     performance = calculate_performance_metrics(results)
 
     maximum_drawdown = calculate_maximum_drawdown(results)
@@ -232,6 +304,10 @@ def main():
 
     print("\nPerformance summary:")
     print(performance.map(lambda value: f"{value:.2%}"))
+
+    print("\nAllocation comparison:")
+    print(allocation_performance.map(lambda value: f"{value:.2%}"))
+
     formatted_regimes = regime_analysis.copy()
 
     percentage_columns = [
@@ -250,6 +326,7 @@ def main():
     plot_cumulative_growth(results)
     plot_rolling_correlation(results)
     plot_regime_comparison(regime_analysis)
+    plot_risk_return(allocation_performance)
 
 if __name__ == "__main__":
     main()
