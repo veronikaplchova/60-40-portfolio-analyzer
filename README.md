@@ -22,6 +22,7 @@ The current analysis uses:
 - Calculates maximum drawdown
 - Visualizes cumulative investment growth
 - Estimates 36-month rolling stock–bond correlation
+- Calculates Sharpe ratios using the 13-week US Treasury bill yield as the risk-free-rate proxy
 
 ## Cumulative growth
 
@@ -47,11 +48,16 @@ The comparison contains 173 negative-correlation months and 50 positive-correlat
 
 The analyzer compares five stock–bond allocations ranging from 100% stocks to 40% stocks and 60% bonds.
 
+
 ![Risk–return comparison of stock–bond allocations](results/figures/risk_return_allocations.png)
 
 Increasing the bond allocation generally reduced both historical return and volatility. The 60/40 portfolio achieved an annualized return of 8.19% with 10.05% volatility, compared with 10.97% return and 14.86% volatility for the stock-only portfolio.
 
 The 50/50 allocation recorded the lowest volatility and smallest maximum drawdown in this sample. Increasing the bond weight to 60% did not reduce risk further, partly because long-duration Treasury bonds experienced substantial interest-rate risk.
+
+The 80/20 allocation recorded the highest Sharpe ratio at 0.69, indicating the strongest historical excess return per unit of volatility among the tested portfolios. The 60/40 portfolio and the stock-only portfolio both recorded Sharpe ratios of approximately 0.66, although the 60/40 portfolio experienced substantially lower volatility and a smaller maximum drawdown.
+
+Sharpe ratios are calculated from monthly excess returns using the 13-week US Treasury bill yield (`^IRX`) as the risk-free-rate proxy. These historical results depend on the selected assets, sample period, rebalancing assumption, and the use of volatility as the measure of risk.
 
 These results describe SPY and TLT between January 2005 and July 2026 and do not identify one universally optimal allocation.
 

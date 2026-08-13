@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 STOCK_TICKER = "SPY"
 BOND_TICKER = "TLT"
+RISK_FREE_TICKER = "^IRX"
 START_DATE = "2005-01-01"
 END_DATE = "2026-08-01"
 
@@ -272,6 +273,50 @@ def plot_risk_return(
     plt.show()
 
 
+def download_monthly_risk_free_rate(
+    start_date: str,
+    end_date: str,
+) -> pd.Series:
+    """Download Treasury bill yields and convert them to monthly returns."""
+
+    daily_yield = yf.download(
+        RISK_FREE_TICKER,
+        start=start_date,
+        end=end_date,
+        auto_adjust=True,
+        progress=False,
+    )["Close"].squeeze()
+
+    monthly_yield = daily_yield.resample("ME").last()
+
+    monthly_risk_free_rate = (
+        (1 + monthly_yield / 100) ** (1 / 12) - 1
+    )
+
+    return monthly_risk_free_rate.rename("Risk-Free Rate")
+
+def calculate_sharpe_ratios(
+    returns: pd.DataFrame,
+    risk_free_rate: pd.Series,
+) -> pd.Series:
+    """Calculate annualized Sharpe ratios using monthly excess returns."""
+
+    aligned_data = returns.join(risk_free_rate, how="inner")
+
+    excess_returns = aligned_data[returns.columns].subtract(
+        aligned_data["Risk-Free Rate"],
+        axis=0,
+    )
+
+    sharpe_ratios = (
+        excess_returns.mean()
+        / excess_returns.std()
+        * np.sqrt(12)
+    )
+
+    return sharpe_ratios
+
+
 def main():
     """Run the portfolio analysis."""
 
@@ -283,12 +328,23 @@ def main():
         END_DATE,
     )
 
+    risk_free_rate = download_monthly_risk_free_rate(
+        START_DATE,
+        END_DATE,
+    )
+
     results = construct_portfolio(monthly_returns)
     allocation_returns = construct_allocation_portfolios(monthly_returns)
     allocation_performance = calculate_performance_metrics(allocation_returns)
     allocation_performance["Maximum Drawdown"] = (
         calculate_maximum_drawdown(allocation_returns)
     )
+    allocation_performance["Sharpe Ratio"] = (
+    calculate_sharpe_ratios(
+        allocation_returns,
+        risk_free_rate,
+    )
+)
 
     allocation_performance.to_csv(
         "results/allocation_comparison.csv"
@@ -305,24 +361,42 @@ def main():
     print("\nPerformance summary:")
     print(performance.map(lambda value: f"{value:.2%}"))
 
+    formatted_allocations = allocation_performance.copy()
+
+    allocation_percentage_columns = [
+        "Annualized Return",
+        "Annualized Volatility",
+        "Maximum Drawdown",
+    ]
+
+    for column in allocation_percentage_columns:
+        formatted_allocations[column] = formatted_allocations[column].map(
+            lambda value: f"{value:.2%}"
+        )
+
+    formatted_allocations["Sharpe Ratio"] = formatted_allocations[
+        "Sharpe Ratio"
+    ].map(lambda value: f"{value:.2f}")
+
     print("\nAllocation comparison:")
-    print(allocation_performance.map(lambda value: f"{value:.2%}"))
+    print(formatted_allocations)
 
     formatted_regimes = regime_analysis.copy()
 
-    percentage_columns = [
+    regime_percentage_columns = [
         "Annualized Average Return",
         "Annualized Volatility",
         "Negative Month Share",
     ]
 
-    for column in percentage_columns:
+    for column in regime_percentage_columns:
         formatted_regimes[column] = formatted_regimes[column].map(
             lambda value: f"{value:.2%}"
         )
 
     print("\nCorrelation-regime comparison:")
     print(formatted_regimes)
+
     plot_cumulative_growth(results)
     plot_rolling_correlation(results)
     plot_regime_comparison(regime_analysis)
