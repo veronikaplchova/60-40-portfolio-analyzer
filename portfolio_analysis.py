@@ -136,6 +136,78 @@ def plot_rolling_correlation(returns: pd.DataFrame) -> None:
     )
     plt.show()
 
+def analyze_correlation_regimes(
+    returns: pd.DataFrame,
+) -> pd.DataFrame:
+    """Compare 60/40 portfolio performance across correlation regimes."""
+
+    rolling_correlation = (
+        returns[STOCK_TICKER]
+        .rolling(window=CORRELATION_WINDOW)
+        .corr(returns[BOND_TICKER])
+    )
+
+    regime_data = pd.DataFrame(
+        {
+            "Portfolio Return": returns["60_40_portfolio"],
+            "Correlation": rolling_correlation,
+        }
+    ).dropna()
+
+    regime_results = []
+
+    regimes = {
+        "Negative correlation": regime_data["Correlation"] < 0,
+        "Positive correlation": regime_data["Correlation"] >= 0,
+    }
+
+    for regime_name, condition in regimes.items():
+        regime_returns = regime_data.loc[condition, "Portfolio Return"]
+
+        regime_results.append(
+            {
+                "Regime": regime_name,
+                "Months": len(regime_returns),
+                "Annualized Average Return": regime_returns.mean() * 12,
+                "Annualized Volatility": regime_returns.std() * np.sqrt(12),
+                "Negative Month Share": (regime_returns < 0).mean(),
+            }
+        )
+
+    return pd.DataFrame(regime_results).set_index("Regime")
+
+def plot_regime_comparison(regime_analysis: pd.DataFrame) -> None:
+    """Compare portfolio return and volatility across correlation regimes."""
+
+    chart_data = regime_analysis[
+        ["Annualized Average Return", "Annualized Volatility"]
+    ] * 100
+
+    ax = chart_data.plot(
+        kind="bar",
+        figsize=(10, 6),
+        color=["steelblue", "darkorange"],
+        width=0.7,
+    )
+
+    plt.title("60/40 Portfolio Performance by Correlation Regime")
+    plt.xlabel("")
+    plt.ylabel("Annualized percentage (%)")
+    plt.xticks(rotation=0)
+    plt.grid(axis="y", alpha=0.3)
+    plt.legend(["Average Return", "Volatility"])
+
+    for container in ax.containers:
+        ax.bar_label(container, fmt="%.2f%%", padding=3)
+
+    plt.tight_layout()
+    plt.savefig(
+        "results/figures/regime_comparison.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.show()
+
 
 def main():
     """Run the portfolio analysis."""
@@ -153,11 +225,31 @@ def main():
 
     maximum_drawdown = calculate_maximum_drawdown(results)
     performance["Maximum Drawdown"] = maximum_drawdown
+    regime_analysis = analyze_correlation_regimes(results)
+    regime_analysis.to_csv(
+    "results/correlation_regime_comparison.csv"
+)
 
     print("\nPerformance summary:")
     print(performance.map(lambda value: f"{value:.2%}"))
+    formatted_regimes = regime_analysis.copy()
+
+    percentage_columns = [
+        "Annualized Average Return",
+        "Annualized Volatility",
+        "Negative Month Share",
+    ]
+
+    for column in percentage_columns:
+        formatted_regimes[column] = formatted_regimes[column].map(
+            lambda value: f"{value:.2%}"
+        )
+
+    print("\nCorrelation-regime comparison:")
+    print(formatted_regimes)
     plot_cumulative_growth(results)
     plot_rolling_correlation(results)
+    plot_regime_comparison(regime_analysis)
 
 if __name__ == "__main__":
     main()

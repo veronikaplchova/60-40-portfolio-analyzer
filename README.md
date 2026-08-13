@@ -31,6 +31,18 @@ The current analysis uses:
 
 ![36-month rolling correlation between SPY and TLT](results/figures/rolling_correlation.png)
 
+## Correlation-regime comparison
+
+The analysis compares 60/40 portfolio performance during periods of negative and positive 36-month stock–bond correlation.
+
+![60/40 portfolio performance by correlation regime](results/figures/regime_comparison.png)
+
+The portfolio produced a similar annualized mean return in both regimes. However, annualized volatility increased from 9.64% during negative-correlation periods to 13.67% during positive-correlation periods.
+
+This descriptive result suggests that positive stock–bond correlation weakened the portfolio's diversification benefit by increasing risk without a corresponding increase in average return.
+
+The comparison contains 173 negative-correlation months and 50 positive-correlation months. It describes historical associations and does not establish that positive correlation caused the difference in portfolio risk.
+
 ## Data source
 
 Historical market data are downloaded through the `yfinance` Python package.
