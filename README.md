@@ -27,6 +27,7 @@ The current analysis uses:
 - Exports result tables to CSV
 - Creates and saves six analytical charts
 - Organizes data, calculations, analysis, and plotting into separate Python modules
+- Provides an interactive Streamlit dashboard with adjustable weights, dates, and correlation windows
 
 ## Methodology
 
@@ -125,6 +126,18 @@ These results describe SPY and TLT between January 2005 and July 2026 and do not
 - Rolling correlations depend on the selected assets, sample period, data frequency, and window length.
 - Historical relationships do not establish causality and do not guarantee future portfolio performance.
 
+## Interactive dashboard
+
+The Streamlit dashboard allows users to adjust the stock and bond allocation, sample dates, and rolling-correlation window. It automatically updates portfolio performance metrics, cumulative growth, and stock–bond correlation.
+
+After installing the required packages, launch the dashboard with:
+
+
+python3 -m streamlit run dashboard.py
+
+The dashboard opens locally in a web browser. Keep the terminal process running while using it.
+
+
 
 ## Installation and usage
 
@@ -162,6 +175,7 @@ The project is divided into focused Python modules:
 - `analysis.py` constructs portfolios and performs correlation-regime, crisis-period, and robustness analyses.
 - `plots.py` creates and saves all visualizations.
 - `portfolio_analysis.py` coordinates the full analytical workflow.
+- `dashboard.py` provides the interactive Streamlit user interface.
 
 ## Data source
 
