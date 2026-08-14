@@ -124,9 +124,8 @@ else:
 
 st.subheader("Portfolio performance")
 
-return_column, volatility_column, drawdown_column, correlation_column = (
-    st.columns(4)
-)
+return_column, volatility_column = st.columns(2)
+drawdown_column, correlation_column = st.columns(2)
 
 return_column.metric(
     "Annualized return",
