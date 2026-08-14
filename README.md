@@ -16,13 +16,35 @@ The current analysis uses:
 
 ## Current features
 
-- Downloads historical financial data
-- Calculates monthly portfolio returns
-- Calculates annualized return and volatility
-- Calculates maximum drawdown
-- Visualizes cumulative investment growth
-- Estimates 36-month rolling stock–bond correlation
-- Calculates Sharpe ratios using the 13-week US Treasury bill yield as the risk-free-rate proxy
+- Downloads adjusted historical prices through `yfinance`
+- Converts daily prices into monthly total returns
+- Constructs a monthly rebalanced 60/40 portfolio
+- Calculates annualized return, volatility, maximum drawdown, and Sharpe ratios
+- Compares five stock–bond allocations
+- Estimates 12-, 36-, and 60-month rolling stock–bond correlations
+- Compares portfolio performance across negative- and positive-correlation regimes
+- Examines performance during the 2008, 2020, and 2022 crisis years
+- Exports result tables to CSV
+- Creates and saves six analytical charts
+- Organizes data, calculations, analysis, and plotting into separate Python modules
+
+## Methodology
+
+Adjusted closing prices for SPY and TLT are converted into month-end total returns. The baseline portfolio allocates 60% to SPY and 40% to TLT and is rebalanced monthly.
+
+Performance is evaluated using annualized return, annualized volatility, maximum drawdown, and the Sharpe ratio. Sharpe ratios use the 13-week US Treasury bill yield (`^IRX`) as the risk-free-rate proxy.
+
+Diversification is examined using a 36-month rolling stock–bond correlation. Portfolio performance is then compared between negative- and positive-correlation regimes. Robustness is assessed using alternative 12- and 60-month windows.
+
+The crisis analysis uses the full calendar years 2008, 2020, and 2022 to ensure that returns are measured over consistent periods. All results are descriptive and based on historical associations.
+
+## Key findings
+
+- The 60/40 portfolio returned 8.19% annually with 10.05% annualized volatility over the sample.
+- Portfolio volatility increased from 9.64% during negative-correlation periods to 13.67% during positive-correlation periods, while average returns remained similar.
+- The transition toward positive stock–bond correlation around 2022–2023 appears across 12-, 36-, and 60-month windows.
+- Bonds substantially cushioned stock losses in 2008, but both assets declined in 2022, causing the 60/40 portfolio to lose 23.31%.
+- The 80/20 allocation recorded the highest historical Sharpe ratio among the five tested portfolios, while the 50/50 allocation recorded the lowest volatility.
 
 ## Cumulative growth
 
@@ -85,6 +107,16 @@ Sharpe ratios are calculated from monthly excess returns using the 13-week US Tr
 
 These results describe SPY and TLT between January 2005 and July 2026 and do not identify one universally optimal allocation.
 
+## Limitations
+
+- SPY and TLT represent only US equities and long-duration US Treasury bonds, so the findings may not apply to other markets or bond maturities.
+- The analysis begins in 2005 because of TLT data availability and therefore does not cover earlier inflation and interest-rate regimes.
+- The portfolio assumes fixed monthly rebalancing and excludes transaction costs, taxes, management fees, and bid–ask spreads.
+- Crisis periods are measured using full calendar years, which can conceal substantial movements within each year, particularly the 2020 crash and recovery.
+- Rolling correlations depend on the selected assets, sample period, data frequency, and window length.
+- Historical relationships do not establish causality and do not guarantee future portfolio performance.
+
+
 ## Installation and usage
 
 Clone the repository and open the project folder:
@@ -128,4 +160,4 @@ Historical market data are downloaded through the `yfinance` Python package.
 
 ## Status
 
-This project is under active development. Planned extensions include correlation-regime analysis, additional portfolio allocations, crisis-period comparisons, and an interactive dashboard.
+The core analysis is complete. Potential future extensions include an interactive dashboard, additional asset classes, and alternative equity and bond proxies.
