@@ -50,9 +50,18 @@ The crisis analysis uses the full calendar years 2008, 2020, and 2022 to ensure 
 
 ![Cumulative growth of SPY, TLT, and the 60/40 portfolio](results/figures/cumulative_growth.png)
 
+SPY generated the highest cumulative growth over the full sample but also experienced the largest fluctuations. TLT grew more slowly and declined substantially after its 2020 peak as rising interest rates reduced the value of long-duration Treasury bonds.
+
+The 60/40 portfolio remained between the two individual assets. It captured a meaningful portion of the long-term equity growth while experiencing smaller declines than SPY during periods when bonds provided effective diversification. However, the portfolio also fell sharply in 2022 when stocks and bonds declined together.
+
 ## Rolling stock–bond correlation
 
 ![36-month rolling correlation between SPY and TLT](results/figures/rolling_correlation.png)
+
+The 36-month stock–bond correlation was predominantly negative for much of the sample, particularly during the early and mid-2010s. In this environment, bonds generally moved differently from stocks and strengthened the portfolio's diversification benefit.
+
+The relationship changed markedly after 2022. Rolling correlation crossed above zero and became strongly positive, remaining above approximately 0.5 toward the end of the sample. This shift indicates that stocks and bonds increasingly moved in the same direction, reducing the protection traditionally associated with combining them in a 60/40 portfolio.
+
 
 ## Robustness checks
 
