@@ -1,0 +1,12 @@
+"""Configuration settings for the portfolio analysis."""
+
+STOCK_TICKER = "SPY"
+BOND_TICKER = "TLT"
+RISK_FREE_TICKER = "^IRX"
+
+START_DATE = "2005-01-01"
+END_DATE = "2026-08-01"
+
+STOCK_WEIGHT = 0.60
+BOND_WEIGHT = 0.40
+CORRELATION_WINDOW = 36

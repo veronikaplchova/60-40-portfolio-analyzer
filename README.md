@@ -85,6 +85,17 @@ Sharpe ratios are calculated from monthly excess returns using the 13-week US Tr
 
 These results describe SPY and TLT between January 2005 and July 2026 and do not identify one universally optimal allocation.
 
+## Project structure
+
+The project is divided into focused Python modules:
+
+- `config.py` defines tickers, portfolio weights, dates, and the main correlation window.
+- `data.py` downloads market data and prepares monthly returns and risk-free rates.
+- `metrics.py` calculates annualized performance, volatility, maximum drawdown, and Sharpe ratios.
+- `analysis.py` constructs portfolios and performs correlation-regime, crisis-period, and robustness analyses.
+- `plots.py` creates and saves all visualizations.
+- `portfolio_analysis.py` coordinates the full analytical workflow.
+
 ## Data source
 
 Historical market data are downloaded through the `yfinance` Python package.
