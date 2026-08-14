@@ -44,6 +44,20 @@ This descriptive result suggests that positive stock–bond correlation weakened
 
 The comparison contains 173 negative-correlation months and 50 positive-correlation months. It describes historical associations and does not establish that positive correlation caused the difference in portfolio risk.
 
+## Crisis-period comparison
+
+The analysis compares SPY, TLT, and the 60/40 portfolio during the 2008 financial crisis, the 2020 COVID crisis, and the 2022 inflation shock.
+
+![Asset and 60/40 portfolio performance during crisis years](results/figures/crisis_comparison.png)
+
+During 2008, SPY lost 36.80%, while TLT gained 33.95%. The opposing bond performance cushioned the portfolio, limiting the 60/40 loss to 13.36%.
+
+In 2020, SPY and TLT both finished the full calendar year positively, and the 60/40 portfolio returned 19.80%. These annual results include the strong market recovery that followed the initial COVID crash.
+
+The outcome was substantially different in 2022. SPY lost 18.18%, TLT lost 31.23%, and the 60/40 portfolio lost 23.31%. Stock–bond correlation was positive at 0.51, meaning that bonds did not provide their traditional protection when stocks declined.
+
+These episodes illustrate that the effectiveness of a 60/40 portfolio depends not only on the performance of each asset but also on how stocks and bonds move relative to one another.
+
 ## Allocation comparison
 
 The analyzer compares five stock–bond allocations ranging from 100% stocks to 40% stocks and 60% bonds.

@@ -317,6 +317,99 @@ def calculate_sharpe_ratios(
     return sharpe_ratios
 
 
+def analyze_crisis_periods(
+    returns: pd.DataFrame,
+) -> pd.DataFrame:
+    """Compare asset and portfolio performance during major crisis years."""
+
+    crisis_periods = {
+        "2008 Financial Crisis": ("2008-01-01", "2008-12-31"),
+        "2020 COVID Crisis": ("2020-01-01", "2020-12-31"),
+        "2022 Inflation Shock": ("2022-01-01", "2022-12-31"),
+    }
+
+    crisis_results = []
+
+    for crisis_name, (start_date, end_date) in crisis_periods.items():
+        crisis_returns = returns.loc[start_date:end_date]
+
+        cumulative_values = (1 + crisis_returns).cumprod()
+        previous_peaks = cumulative_values.cummax().clip(lower=1.0)
+        portfolio_drawdowns = (
+            cumulative_values["60_40_portfolio"]
+            / previous_peaks["60_40_portfolio"]
+            - 1
+        )
+
+        crisis_results.append(
+            {
+                "Crisis": crisis_name,
+                "SPY Total Return": (
+                    1 + crisis_returns[STOCK_TICKER]
+                ).prod() - 1,
+                "TLT Total Return": (
+                    1 + crisis_returns[BOND_TICKER]
+                ).prod() - 1,
+                "60/40 Total Return": (
+                    1 + crisis_returns["60_40_portfolio"]
+                ).prod() - 1,
+                "60/40 Volatility": (
+                    crisis_returns["60_40_portfolio"].std()
+                    * np.sqrt(12)
+                ),
+                "60/40 Maximum Drawdown": portfolio_drawdowns.min(),
+                "Stock–Bond Correlation": crisis_returns[
+                    STOCK_TICKER
+                ].corr(crisis_returns[BOND_TICKER]),
+            }
+        )
+
+    return pd.DataFrame(crisis_results).set_index("Crisis")
+
+
+def plot_crisis_comparison(
+    crisis_analysis: pd.DataFrame,
+) -> None:
+    """Plot asset and portfolio returns during major crisis years."""
+
+    chart_data = crisis_analysis[
+        [
+            "SPY Total Return",
+            "TLT Total Return",
+            "60/40 Total Return",
+        ]
+    ] * 100
+
+    ax = chart_data.plot(
+        kind="bar",
+        figsize=(11, 6),
+        color=["steelblue", "darkorange", "seagreen"],
+        width=0.75,
+    )
+
+    
+    plt.title("Asset and 60/40 Portfolio Performance During Crisis Years")
+    plt.xlabel("")
+    plt.ylabel("Total return (%)")
+    plt.xticks(rotation=0)
+    plt.grid(axis="y", alpha=0.3)
+    plt.legend(["SPY (Stocks)", "TLT (Bonds)", "60/40 Portfolio"])
+    plt.axhline(0, color="black", linewidth=1)
+
+    for container in ax.containers:
+        ax.bar_label(container, fmt="%.1f%%", padding=3)
+
+    plt.tight_layout()
+    plt.savefig(
+        "results/figures/crisis_comparison.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.show()
+
+
+
+
 def main():
     """Run the portfolio analysis."""
 
@@ -353,6 +446,11 @@ def main():
 
     maximum_drawdown = calculate_maximum_drawdown(results)
     performance["Maximum Drawdown"] = maximum_drawdown
+    crisis_analysis = analyze_crisis_periods(results)
+
+    crisis_analysis.to_csv(
+      "results/crisis_comparison.csv"
+)
     regime_analysis = analyze_correlation_regimes(results)
     regime_analysis.to_csv(
     "results/correlation_regime_comparison.csv"
@@ -397,10 +495,33 @@ def main():
     print("\nCorrelation-regime comparison:")
     print(formatted_regimes)
 
+    formatted_crises = crisis_analysis.copy()
+
+    crisis_percentage_columns = [
+        "SPY Total Return",
+        "TLT Total Return",
+        "60/40 Total Return",
+        "60/40 Volatility",
+        "60/40 Maximum Drawdown",
+    ]
+
+    for column in crisis_percentage_columns:
+        formatted_crises[column] = formatted_crises[column].map(
+            lambda value: f"{value:.2%}"
+        )
+
+    formatted_crises["Stock–Bond Correlation"] = formatted_crises[
+        "Stock–Bond Correlation"
+    ].map(lambda value: f"{value:.2f}")
+
+    print("\nCrisis-period comparison:")
+    print(formatted_crises)
+
     plot_cumulative_growth(results)
     plot_rolling_correlation(results)
     plot_regime_comparison(regime_analysis)
-    plot_risk_return(allocation_performance)
+    plot_crisis_comparison(crisis_analysis)
+    plot_risk_return(allocation_performance)    
 
 if __name__ == "__main__":
     main()
