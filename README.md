@@ -32,6 +32,16 @@ The current analysis uses:
 
 ![36-month rolling correlation between SPY and TLT](results/figures/rolling_correlation.png)
 
+## Robustness checks
+
+To test whether the observed correlation pattern depends on the selected window length, the analysis compares 12-, 36-, and 60-month rolling correlations.
+
+![Robustness check using alternative rolling-correlation windows](results/figures/correlation_robustness.png)
+
+The 12-month correlation is more responsive to recent market movements but is also considerably more volatile. The 60-month correlation changes more gradually and represents a longer-term relationship, while the 36-month measure provides an intermediate specification.
+
+Despite these differences, all three windows identify a broad transition from predominantly negative stock–bond correlation to positive correlation around 2022–2023. This indicates that the main conclusion is not driven solely by the choice of a 36-month rolling window.
+
 ## Correlation-regime comparison
 
 The analysis compares 60/40 portfolio performance during periods of negative and positive 36-month stock–bond correlation.

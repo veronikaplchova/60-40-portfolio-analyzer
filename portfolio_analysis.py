@@ -407,7 +407,72 @@ def plot_crisis_comparison(
     )
     plt.show()
 
+def calculate_rolling_correlations(
+    returns: pd.DataFrame,
+) -> pd.DataFrame:
+    """Calculate stock–bond correlations using multiple rolling windows."""
 
+    correlation_windows = [12, 36, 60]
+    rolling_correlations = pd.DataFrame(index=returns.index)
+
+    for window in correlation_windows:
+        rolling_correlations[f"{window}-Month Correlation"] = (
+            returns[STOCK_TICKER]
+            .rolling(window=window)
+            .corr(returns[BOND_TICKER])
+        )
+
+    return rolling_correlations
+
+
+
+def plot_correlation_robustness(
+    rolling_correlations: pd.DataFrame,
+) -> None:
+    """Compare rolling correlations across different window lengths."""
+
+    plt.figure(figsize=(12, 7))
+
+    plt.plot(
+        rolling_correlations.index,
+        rolling_correlations["12-Month Correlation"],
+        label="12-month window",
+        color="lightcoral",
+        linewidth=1.5,
+        alpha=0.8,
+    )
+
+    plt.plot(
+        rolling_correlations.index,
+        rolling_correlations["36-Month Correlation"],
+        label="36-month window",
+        color="purple",
+        linewidth=2.5,
+    )
+
+    plt.plot(
+        rolling_correlations.index,
+        rolling_correlations["60-Month Correlation"],
+        label="60-month window",
+        color="teal",
+        linewidth=2,
+    )
+
+    plt.axhline(0, color="black", linewidth=1, linestyle="--")
+    plt.title("Robustness Check: Stock–Bond Rolling Correlation")
+    plt.xlabel("Date")
+    plt.ylabel("Correlation")
+    plt.ylim(-1, 1)
+    plt.grid(alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+
+    plt.savefig(
+        "results/figures/correlation_robustness.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
+    plt.show()
 
 
 def main():
@@ -446,6 +511,11 @@ def main():
 
     maximum_drawdown = calculate_maximum_drawdown(results)
     performance["Maximum Drawdown"] = maximum_drawdown
+    rolling_correlations = calculate_rolling_correlations(results)
+
+    rolling_correlations.to_csv(
+      "results/rolling_correlation_robustness.csv"
+)
     crisis_analysis = analyze_crisis_periods(results)
 
     crisis_analysis.to_csv(
@@ -519,6 +589,7 @@ def main():
 
     plot_cumulative_growth(results)
     plot_rolling_correlation(results)
+    plot_correlation_robustness(rolling_correlations)
     plot_regime_comparison(regime_analysis)
     plot_crisis_comparison(crisis_analysis)
     plot_risk_return(allocation_performance)    
