@@ -2,6 +2,8 @@
 
 A Python project analyzing stock–bond correlation and the historical performance of a traditional 60/40 portfolio.
 
+[Open the interactive dashboard](https://60-40-portfolio-analyzer.streamlit.app)
+
 ## Project objective
 
 This project investigates how changes in the relationship between stocks and bonds affect portfolio diversification.
