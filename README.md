@@ -85,6 +85,32 @@ Sharpe ratios are calculated from monthly excess returns using the 13-week US Tr
 
 These results describe SPY and TLT between January 2005 and July 2026 and do not identify one universally optimal allocation.
 
+## Installation and usage
+
+Clone the repository and open the project folder:
+
+```bash
+git clone https://github.com/veronikaplchova/60-40-portfolio-analyzer.git
+cd 60-40-portfolio-analyzer
+```
+
+Install the required Python packages:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+Run the complete analysis:
+
+```bash
+python3 portfolio_analysis.py
+```
+
+The script downloads updated market data, prints performance tables in the terminal, and saves CSV results and charts in the `results` folder.
+
+An internet connection is required because the market data are downloaded through Yahoo Finance.
+
+
 ## Project structure
 
 The project is divided into focused Python modules:
