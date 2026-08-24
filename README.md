@@ -84,7 +84,7 @@ The analysis compares 60/40 portfolio performance during periods of negative and
 
 The portfolio produced a similar annualized mean return in both regimes. However, annualized volatility increased from 9.64% during negative-correlation periods to 13.67% during positive-correlation periods.
 
-This descriptive result suggests that positive stock–bond correlation weakened the portfolio's diversification benefit by increasing risk without a corresponding increase in average return.
+This descriptive result suggests that positive stock–bond correlation was associated with a weaker diversification benefit, as portfolio volatility was higher without a corresponding increase in average return.
 
 The comparison contains 173 negative-correlation months and 50 positive-correlation months. It describes historical associations and does not establish that positive correlation caused the difference in portfolio risk.
 
@@ -122,7 +122,7 @@ These results describe SPY and TLT between January 2005 and July 2026 and do not
 ## Limitations
 
 - SPY and TLT represent only US equities and long-duration US Treasury bonds, so the findings may not apply to other markets or bond maturities.
-- The analysis begins in 2005 because of TLT data availability and therefore does not cover earlier inflation and interest-rate regimes.
+- The analysis uses a sample beginning in January 2005 and therefore does not capture earlier inflation and interest-rate regimes.
 - The portfolio assumes fixed monthly rebalancing and excludes transaction costs, taxes, management fees, and bid–ask spreads.
 - Crisis periods are measured using full calendar years, which can conceal substantial movements within each year, particularly the 2020 crash and recovery.
 - Rolling correlations depend on the selected assets, sample period, data frequency, and window length.
@@ -185,4 +185,4 @@ Historical market data are downloaded through the `yfinance` Python package.
 
 ## Status
 
-The core analysis is complete. Potential future extensions include an interactive dashboard, additional asset classes, and alternative equity and bond proxies.
+The core analysis and interactive dashboard are complete. Potential future extensions include additional asset classes, alternative equity and bond proxies, formal structural-break tests, and dynamic-correlation models such as DCC-GARCH.
