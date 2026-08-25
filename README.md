@@ -147,14 +147,10 @@ The 50/50 portfolio recorded the lowest volatility and smallest maximum drawdown
 Risk-adjusted performance is evaluated using the Sharpe ratio:
 
 $$
-SR_p =
-\sqrt{12}
-\frac{
-\frac{1}{N}\sum_{t=1}^{N}(R_{p,t}-R_{f,t})
-}{
-\sigma_p
-}
+SR_p = \frac{R_p-R_f}{\sigma_p}
 $$
+
+where `R_p` represents the portfolio’s average return, `R_f` is the risk-free return, and `σ_p` is portfolio volatility. In the analysis, the Sharpe ratio is estimated from monthly excess returns and annualized using the square root of 12.
 
 Monthly excess returns are calculated using the 13-week US Treasury bill yield (`^IRX`) as the risk-free-rate proxy. The 80/20 allocation recorded the highest historical Sharpe ratio at approximately 0.69, indicating the greatest excess return per unit of volatility among the five tested portfolios. The 60/40 and stock-only portfolios both recorded Sharpe ratios of approximately 0.66, although the 60/40 portfolio experienced substantially lower volatility and a smaller maximum drawdown.
 
