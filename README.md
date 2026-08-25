@@ -110,7 +110,13 @@ The results therefore indicate that positive stock–bond correlation was associ
 
 ![Asset and 60/40 portfolio performance during crisis years](results/figures/crisis_comparison.png)
 
-The chart compares the compounded full-calendar-year returns of SPY, TLT, and the monthly rebalanced 60/40 portfolio during three distinct market disruptions. Monthly portfolio returns are calculated as \(R_{p,m}=0.60R_{SPY,m}+0.40R_{TLT,m}\) and compounded across each year. Consequently, the reported 60/40 return is not necessarily equal to a simple weighted average of the two displayed annual asset returns.
+The chart compares the compounded full-calendar-year returns of SPY, TLT, and the monthly rebalanced 60/40 portfolio during three distinct market disruptions. Monthly portfolio returns are calculated as:
+
+$$
+R_{p,m} = 0.60R_{SPY,m} + 0.40R_{TLT,m}
+$$
+
+These monthly returns are then compounded across each calendar year. Consequently, the reported 60/40 return is not necessarily equal to a simple weighted average of the two displayed annual asset returns.
 
 During the 2008 financial crisis, SPY lost 36.80% while TLT gained 33.95%. The opposing performance of long-term Treasury bonds offset a substantial part of the equity decline, limiting the 60/40 portfolio’s loss to 13.36%. This illustrates an environment in which bonds provided effective downside diversification.
 
