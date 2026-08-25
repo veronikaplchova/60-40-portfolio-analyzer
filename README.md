@@ -182,10 +182,13 @@ All metrics and charts update automatically when the selected inputs change, all
 
 
 
+**[Open the live interactive dashboard](https://60-40-portfolio-analyzer.streamlit.app)**
+
 After installing the required packages, launch the dashboard with:
 
-
+```bash
 python3 -m streamlit run dashboard.py
+```
 
 The dashboard opens locally in a web browser. Keep the terminal process running while using it.
 
