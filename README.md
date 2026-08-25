@@ -138,7 +138,7 @@ $$
 R_{p,t}=w_SR_{SPY,t}+w_BR_{TLT,t}
 $$
 
-where the portfolio weights satisfy \(w_S+w_B=1\). The vertical axis reports the annualized compound return, while the horizontal axis reports annualized volatility, calculated as the standard deviation of monthly returns multiplied by the square root of 12. Points located higher on the graph generated greater historical returns, while points farther to the left experienced lower volatility.
+where the stock and bond weights sum to one. The vertical axis reports the annualized compound return, while the horizontal axis reports annualized volatility, calculated as the standard deviation of monthly returns multiplied by the square root of 12. Points located higher on the graph generated greater historical returns, while points farther to the left experienced lower volatility.
 
 Increasing the bond allocation generally reduced both return and volatility. The stock-only portfolio achieved the highest annualized return at 10.97%, but also recorded the highest volatility at 14.86%. The 60/40 portfolio achieved an annualized return of 8.19% with volatility of 10.05%, capturing a substantial portion of the equity return while reducing historical fluctuations and maximum drawdown.
 
