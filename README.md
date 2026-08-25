@@ -53,40 +53,64 @@ The crisis analysis uses the full calendar years 2008, 2020, and 2022 to ensure 
 
 ![Cumulative growth of SPY, TLT, and the 60/40 portfolio](results/figures/cumulative_growth.png)
 
-SPY generated the highest cumulative growth over the full sample but also experienced the largest fluctuations. TLT grew more slowly and declined substantially after its 2020 peak as rising interest rates reduced the value of long-duration Treasury bonds.
+The chart shows the cumulative value of $1 invested in SPY, TLT, and a monthly rebalanced 60/40 portfolio from January 2005 through July 2026. By the end of the sample, the initial $1 had grown to approximately $9.4 in SPY, $1.9 in TLT, and $5.5 in the 60/40 portfolio. SPY therefore generated the highest cumulative growth, although it also experienced the largest fluctuations, including substantial declines during the 2008 financial crisis, the 2020 COVID crash, and the 2022 market downturn.
 
-The 60/40 portfolio remained between the two individual assets. It captured a meaningful portion of the long-term equity growth while experiencing smaller declines than SPY during periods when bonds provided effective diversification. However, the portfolio also fell sharply in 2022 when stocks and bonds declined together.
+TLT followed a different pattern. It provided protection during the 2008 stock-market decline and reached its highest cumulative value around 2020, when falling interest rates supported long-term Treasury prices. TLT subsequently declined substantially as inflation increased and interest rates rose, reducing the present value of its long-dated fixed payments.
+
+The 60/40 portfolio generally remained between the two individual assets. Its bond allocation limited losses relative to SPY in 2008, allowing the portfolio to capture a meaningful portion of long-term equity growth with smaller overall fluctuations. This diversification benefit weakened in 2022, when SPY and TLT declined simultaneously and the portfolio consequently experienced a pronounced loss. After 2022, SPY recovered strongly while TLT remained weak, so the 60/40 portfolio also recovered but grew more slowly than the stock-only investment.
+
+Overall, the chart illustrates the central trade-off of the 60/40 strategy: it sacrificed part of SPY’s long-term return in exchange for greater stability, but the level of protection provided by bonds varied across market environments.
 
 ## Rolling stock–bond correlation
 
 ![36-month rolling correlation between SPY and TLT](results/figures/rolling_correlation.png)
 
-The 36-month stock–bond correlation was predominantly negative for much of the sample, particularly during the early and mid-2010s. In this environment, bonds generally moved differently from stocks and strengthened the portfolio's diversification benefit.
+The chart reports the 36-month rolling Pearson correlation between monthly total returns on SPY and TLT. Each observation is calculated using the contemporaneous monthly returns from the preceding 36-month window, after which the window advances by one month. Consequently, the plotted series begins later than the underlying January 2005 sample because 36 monthly observations are required to estimate the first correlation coefficient.
 
-The relationship changed markedly after 2022. Rolling correlation crossed above zero and became strongly positive, remaining above approximately 0.5 toward the end of the sample. This shift indicates that stocks and bonds increasingly moved in the same direction, reducing the protection traditionally associated with combining them in a 60/40 portfolio.
+The rolling correlation was predominantly negative for most of the sample and reached approximately -0.8 during the early 2010s. Negative correlation indicates that SPY and TLT returns generally moved in opposite directions within the corresponding 36-month windows, allowing the bond allocation to offset part of the variation in equity returns and strengthen the diversification benefit of the 60/40 portfolio.
+
+The relationship changed substantially around 2022–2023. The rolling correlation crossed above zero and subsequently increased to approximately 0.5–0.7. Positive correlation indicates that stocks and bonds increasingly generated returns in the same direction, although it does not indicate whether those returns were positive or negative. This stronger positive co-movement reduced TLT’s effectiveness as a hedge against fluctuations in SPY and increased the portfolio’s exposure to simultaneous losses in both assets.
+
+The results demonstrate that stock–bond correlation is time-varying rather than constant. Therefore, the risk-reduction benefit of combining stocks and bonds depends not only on the individual volatility of each asset but also on how their returns co-move over time.
 
 
 ## Robustness checks
 
-To test whether the observed correlation pattern depends on the selected window length, the analysis compares 12-, 36-, and 60-month rolling correlations.
-
 ![Robustness check using alternative rolling-correlation windows](results/figures/correlation_robustness.png)
 
-The 12-month correlation is more responsive to recent market movements but is also considerably more volatile. The 60-month correlation changes more gradually and represents a longer-term relationship, while the 36-month measure provides an intermediate specification.
+This robustness check evaluates whether the observed evolution of stock–bond correlation is sensitive to the selected rolling-window length. The analysis compares 12-, 36-, and 60-month rolling Pearson correlations calculated from monthly total returns on SPY and TLT. Each coefficient is estimated using the observations contained in the corresponding trailing window, which advances by one month at a time.
 
-Despite these differences, all three windows identify a broad transition from predominantly negative stock–bond correlation to positive correlation around 2022–2023. This indicates that the main conclusion is not driven solely by the choice of a 36-month rolling window.
+The 12-month specification responds most quickly to changes in recent market behaviour because each observation represents a relatively large proportion of the estimation window. It is consequently more volatile and more sensitive to individual months or short-lived market shocks. The 60-month specification incorporates five years of returns, producing a smoother correlation series but reacting more slowly when the underlying relationship changes. The 36-month window provides an intermediate specification that balances responsiveness with estimate stability and is therefore used as the baseline measure in the analysis.
+
+Despite differences in their timing and short-run variation, all three specifications identify the same broad transition. Stock–bond correlation was predominantly negative over much of the historical sample, while the 12-month estimate became positive first and the longer windows subsequently followed around 2022–2023. The delayed response of the 36- and 60-month estimates occurs because their windows continued to include observations from the preceding negative-correlation regime.
+
+Toward the end of the sample, the 12-month correlation declined to approximately 0.2, while the 36- and 60-month measures remained close to 0.5–0.6. This suggests that recent positive stock–bond co-movement has weakened relative to its earlier peak, but the medium- and longer-term relationship remains positive.
+
+The consistency of the broad regime shift across all three window lengths indicates that the main finding is not driven solely by the baseline 36-month specification. However, this comparison should be interpreted as a sensitivity analysis rather than a formal test of a structural break: it demonstrates robustness to alternative window choices but does not establish the statistical significance or permanence of the change in correlation.
 
 ## Correlation-regime comparison
 
-The analysis compares 60/40 portfolio performance during periods of negative and positive 36-month stock–bond correlation.
-
 ![60/40 portfolio performance by correlation regime](results/figures/regime_comparison.png)
 
-The portfolio produced a similar annualized mean return in both regimes. However, annualized volatility increased from 9.64% during negative-correlation periods to 13.67% during positive-correlation periods.
+Each month is classified according to the sign of the preceding 36-month rolling correlation between SPY and TLT returns. Months with a correlation below zero form the negative-correlation regime, while months with a correlation equal to or above zero form the positive-correlation regime. The comparison contains 173 negative-correlation months and 50 positive-correlation months.
 
-This descriptive result suggests that positive stock–bond correlation was associated with a weaker diversification benefit, as portfolio volatility was higher without a corresponding increase in average return.
+The 60/40 portfolio produced similar annualized mean returns in the two regimes: 8.51% during negative-correlation periods and 8.37% during positive-correlation periods. However, annualized volatility increased from 9.64% to 13.67%, representing an increase of approximately 42%.
 
-The comparison contains 173 negative-correlation months and 50 positive-correlation months. It describes historical associations and does not establish that positive correlation caused the difference in portfolio risk.
+This result is consistent with the two-asset portfolio-variance formula:
+
+\[
+\sigma_p^2
+=
+w_S^2\sigma_S^2
++
+w_B^2\sigma_B^2
++
+2w_Sw_B\sigma_S\sigma_B\rho_{S,B}
+\]
+
+The final component is the covariance term. When stock–bond correlation is negative, this term reduces total portfolio variance because movements in one asset tend to offset movements in the other. When correlation is positive, the covariance term increases portfolio variance because stock and bond movements reinforce one another.
+
+The results therefore indicate that positive stock–bond correlation was associated with weaker diversification: investors experienced substantially higher portfolio volatility without receiving a corresponding increase in average return. However, the comparison is descriptive rather than causal. Portfolio volatility also depends on the individual volatilities of SPY and TLT, and the two regimes contain different numbers of observations and correspond to different macroeconomic environments.
 
 ## Crisis-period comparison
 
