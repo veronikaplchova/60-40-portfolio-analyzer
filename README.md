@@ -1,6 +1,7 @@
 # 60/40 Portfolio Analyzer
 
-A Python project analyzing stock–bond correlation and the historical performance of a traditional 60/40 portfolio.
+A Python project analysing the evolution of stock-bond correlation and its effect on the historical performance, risk, and diversification benefits of a traditional 60/40 portfolio. Using SPY and TLT data, the project compares correlation regimes, crisis periods, and alternative portfolio allocations through a reproducible analysis and interactive Streamlit dashboard.
+
 
 [Open the interactive dashboard](https://60-40-portfolio-analyzer.streamlit.app)
 
