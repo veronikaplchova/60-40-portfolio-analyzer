@@ -57,7 +57,7 @@ st.sidebar.write(f"Bond weight: **{bond_weight_percent}%**")
 
 start_date = st.sidebar.date_input(
     "Start date",
-    value=date(2005, 1, 1),
+    value=date.today(),
 )
 
 end_date = st.sidebar.date_input(
