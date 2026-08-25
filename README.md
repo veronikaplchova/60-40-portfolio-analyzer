@@ -167,9 +167,20 @@ The results do not identify one universally optimal allocation. The stock-only p
 - The correlation-regime comparison contains substantially more negative-correlation months than positive-correlation months, so the two regime estimates are based on unequal sample sizes.
 - The analysis is descriptive and does not apply formal statistical tests for differences between regimes or structural breaks in the stock–bond relationship.
 
+
 ## Interactive dashboard
 
-The Streamlit dashboard allows users to adjust the stock and bond allocation, sample dates, and rolling-correlation window. It automatically updates portfolio performance metrics, cumulative growth, and stock–bond correlation.
+The Streamlit dashboard allows users to explore how portfolio construction and stock–bond correlation affect historical performance. Users can adjust the stock and bond weights, select the sample period, and change the rolling-correlation window. The dashboard automatically downloads market data and recalculates:
+
+- Annualized return
+- Annualized volatility
+- Maximum drawdown
+- Cumulative growth of $1
+- Rolling stock–bond correlation
+
+All metrics and charts update automatically when the selected inputs change, allowing users to compare different portfolio allocations and examine how diversification evolved over time.
+
+
 
 After installing the required packages, launch the dashboard with:
 
