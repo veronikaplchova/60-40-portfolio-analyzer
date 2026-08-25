@@ -164,6 +164,8 @@ The results do not identify one universally optimal allocation. The stock-only p
 - Crisis periods are measured using full calendar years, which can conceal substantial movements within each year, particularly the 2020 crash and recovery.
 - Rolling correlations depend on the selected assets, sample period, data frequency, and window length.
 - Historical relationships do not establish causality and do not guarantee future portfolio performance.
+- The correlation-regime comparison contains substantially more negative-correlation months than positive-correlation months, so the two regime estimates are based on unequal sample sizes.
+- The analysis is descriptive and does not apply formal statistical tests for differences between regimes or structural breaks in the stock–bond relationship.
 
 ## Interactive dashboard
 
