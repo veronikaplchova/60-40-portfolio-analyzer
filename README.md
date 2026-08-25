@@ -98,15 +98,9 @@ The 60/40 portfolio produced similar annualized mean returns in the two regimes:
 
 This result is consistent with the two-asset portfolio-variance formula:
 
-\[
-\sigma_p^2
-=
-w_S^2\sigma_S^2
-+
-w_B^2\sigma_B^2
-+
-2w_Sw_B\sigma_S\sigma_B\rho_{S,B}
-\]
+$$
+\sigma_p^2 = w_S^2 \sigma_S^2 + w_B^2 \sigma_B^2 + 2w_Sw_B\sigma_S\sigma_B\rho_{S,B}
+$$
 
 The final component is the covariance term. When stock–bond correlation is negative, this term reduces total portfolio variance because movements in one asset tend to offset movements in the other. When correlation is positive, the covariance term increases portfolio variance because stock and bond movements reinforce one another.
 
