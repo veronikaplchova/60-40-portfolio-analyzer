@@ -128,20 +128,31 @@ Together, these episodes demonstrate that the defensive effectiveness of a 60/40
 
 ## Allocation comparison
 
-The analyzer compares five stock–bond allocations ranging from 100% stocks to 40% stocks and 60% bonds.
-
-
 ![Risk–return comparison of stock–bond allocations](results/figures/risk_return_allocations.png)
 
-Increasing the bond allocation generally reduced both historical return and volatility. The 60/40 portfolio achieved an annualized return of 8.19% with 10.05% volatility, compared with 10.97% return and 14.86% volatility for the stock-only portfolio.
+The allocation comparison evaluates how changing the relative weights of SPY and TLT affected the historical risk–return trade-off. Five monthly rebalanced portfolios are considered: 100/0, 80/20, 60/40, 50/50, and 40/60, where the first number represents the percentage invested in SPY and the second represents the percentage invested in TLT.
 
-The 50/50 allocation recorded the lowest volatility and smallest maximum drawdown in this sample. Increasing the bond weight to 60% did not reduce risk further, partly because long-duration Treasury bonds experienced substantial interest-rate risk.
+For each allocation, monthly portfolio returns are calculated as:
 
-The 80/20 allocation recorded the highest Sharpe ratio at 0.69, indicating the strongest historical excess return per unit of volatility among the tested portfolios. The 60/40 portfolio and the stock-only portfolio both recorded Sharpe ratios of approximately 0.66, although the 60/40 portfolio experienced substantially lower volatility and a smaller maximum drawdown.
+$$
+R_{p,t}=w_SR_{SPY,t}+w_BR_{TLT,t}
+$$
 
-Sharpe ratios are calculated from monthly excess returns using the 13-week US Treasury bill yield (`^IRX`) as the risk-free-rate proxy. These historical results depend on the selected assets, sample period, rebalancing assumption, and the use of volatility as the measure of risk.
+where the portfolio weights satisfy \(w_S+w_B=1\). The vertical axis reports the annualized compound return, while the horizontal axis reports annualized volatility, calculated as the standard deviation of monthly returns multiplied by the square root of 12. Points located higher on the graph generated greater historical returns, while points farther to the left experienced lower volatility.
 
-These results describe SPY and TLT between January 2005 and July 2026 and do not identify one universally optimal allocation.
+Increasing the bond allocation generally reduced both return and volatility. The stock-only portfolio achieved the highest annualized return at 10.97%, but also recorded the highest volatility at 14.86%. The 60/40 portfolio achieved an annualized return of 8.19% with volatility of 10.05%, capturing a substantial portion of the equity return while reducing historical fluctuations and maximum drawdown.
+
+The 50/50 portfolio recorded the lowest volatility and smallest maximum drawdown among the tested allocations. Increasing the TLT weight further to 60% did not reduce risk: the 40/60 portfolio produced a lower return and slightly higher volatility than the 50/50 allocation. In this sample, the 40/60 portfolio was therefore historically dominated by 50/50, which provided both a higher return and lower volatility. This result reflects the fact that TLT is not risk-free and remains exposed to substantial long-duration interest-rate risk.
+
+Risk-adjusted performance is evaluated using the Sharpe ratio:
+
+$$
+SR_p=\frac{\overline{R_p-R_f}}{\sigma_p}
+$$
+
+Monthly excess returns are calculated using the 13-week US Treasury bill yield (`^IRX`) as the risk-free-rate proxy. The 80/20 allocation recorded the highest historical Sharpe ratio at approximately 0.69, indicating the greatest excess return per unit of volatility among the five tested portfolios. The 60/40 and stock-only portfolios both recorded Sharpe ratios of approximately 0.66, although the 60/40 portfolio experienced substantially lower volatility and a smaller maximum drawdown.
+
+The results do not identify one universally optimal allocation. The stock-only portfolio maximized historical return, 50/50 minimized volatility, and 80/20 produced the highest Sharpe ratio. The preferred portfolio therefore depends on whether an investor prioritizes total return, stability, drawdown protection, or risk-adjusted performance. These findings are specific to SPY and TLT over the January 2005–July 2026 sample and depend on the monthly rebalancing assumption and the use of volatility as the primary measure of risk.
 
 ## Limitations
 
