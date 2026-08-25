@@ -57,12 +57,12 @@ st.sidebar.write(f"Bond weight: **{bond_weight_percent}%**")
 
 start_date = st.sidebar.date_input(
     "Start date",
-    value=date.today(),
+    value=date(2005, 1, 1),
 )
 
 end_date = st.sidebar.date_input(
     "End date",
-    value=date(2026, 8, 1),
+    value=date.today(),
 )
 
 correlation_window = st.sidebar.select_slider(
