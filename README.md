@@ -108,17 +108,17 @@ The results therefore indicate that positive stock–bond correlation was associ
 
 ## Crisis-period comparison
 
-The analysis compares SPY, TLT, and the 60/40 portfolio during the 2008 financial crisis, the 2020 COVID crisis, and the 2022 inflation shock.
-
 ![Asset and 60/40 portfolio performance during crisis years](results/figures/crisis_comparison.png)
 
-During 2008, SPY lost 36.80%, while TLT gained 33.95%. The opposing bond performance cushioned the portfolio, limiting the 60/40 loss to 13.36%.
+The chart compares the compounded full-calendar-year returns of SPY, TLT, and the monthly rebalanced 60/40 portfolio during three distinct market disruptions. Monthly portfolio returns are calculated as \(R_{p,m}=0.60R_{SPY,m}+0.40R_{TLT,m}\) and compounded across each year. Consequently, the reported 60/40 return is not necessarily equal to a simple weighted average of the two displayed annual asset returns.
 
-In 2020, SPY and TLT both finished the full calendar year positively, and the 60/40 portfolio returned 19.80%. These annual results include the strong market recovery that followed the initial COVID crash.
+During the 2008 financial crisis, SPY lost 36.80% while TLT gained 33.95%. The opposing performance of long-term Treasury bonds offset a substantial part of the equity decline, limiting the 60/40 portfolio’s loss to 13.36%. This illustrates an environment in which bonds provided effective downside diversification.
 
-The outcome was substantially different in 2022. SPY lost 18.18%, TLT lost 31.23%, and the 60/40 portfolio lost 23.31%. Stock–bond correlation was positive at 0.51, meaning that bonds did not provide their traditional protection when stocks declined.
+In 2020, SPY and TLT finished the full calendar year with returns of 18.3% and 18.2%, respectively, while the monthly rebalanced 60/40 portfolio returned 19.8%. These annual figures include both the severe initial COVID-19 market decline and the strong recovery that followed. They therefore describe the final compounded result for the year rather than the magnitude of the temporary crash.
 
-These episodes illustrate that the effectiveness of a 60/40 portfolio depends not only on the performance of each asset but also on how stocks and bonds move relative to one another.
+The outcome was substantially different during the 2022 inflation shock. SPY lost 18.18%, TLT lost 31.23%, and the 60/40 portfolio declined by 23.31%. Rising inflation and interest rates placed downward pressure on both equity valuations and long-duration bond prices. With stock–bond correlation positive at approximately 0.51, the two assets tended to move in the same direction, preventing TLT from providing its traditional protection against equity losses.
+
+Together, these episodes demonstrate that the defensive effectiveness of a 60/40 portfolio is regime-dependent. Bonds provided substantial protection in 2008, both assets contributed positively to the full-year outcome in 2020, and both generated losses in 2022. The comparison is descriptive and based on full calendar years; it does not capture within-year volatility, maximum drawdowns, or the precise timing of each crisis and recovery.
 
 ## Allocation comparison
 
